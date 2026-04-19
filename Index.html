@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryanair - Catch Flights, Not Delays</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #062c8b 0%, #062c8b 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FFD700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 51, 153, 0.7), rgba(0, 82, 204, 0.7)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f0f0f0" width="1200" height="400"/><path fill="%23ddd" d="M0 250 Q300 200 600 250 T1200 250 L1200 400 L0 400 Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: -3rem auto 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .booking-section h2 {
+            color: #062c8b;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #062c8b;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #062c8b;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .feature-card:nth-child(2) .feature-image {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .feature-card:nth-child(3) .feature-image {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .feature-card:nth-child(4) .feature-image {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .feature-content {
+            padding: 1.5rem;
+        }
+
+        .feature-content h3 {
+            color: #062c8b;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-content p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #062c8b 0%, #062c8b 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(6,44,139,0.3);
+        }
+
+        .btn-secondary {
+            background: #FFD700;
+            color: #062c8b;
+        }
+
+        .btn-secondary:hover {
+            background: #FFC700;
+        }
+
+        /* Footer */
+        footer {
+            background: #062c8b;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .booking-section {
+                padding: 2rem;
+                margin: -2rem 20px 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><img src="logo2.png" alt="Ryanair Logo" style="height: 50px; object-fit: contain;"></div>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="flights.html">Flights</a></li>
+                    <li><a href="#fleet">Fleet</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Catch Flights, Not Delays ✈️</h1>
+            <p>Europe's Favorite Airline - Book Your Adventure Today</p>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <div class="container">
+        <div class="booking-section">
+            <h2>Book Your Flight</h2>
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="departure">Departure</label>
+                        <input type="text" id="departure" placeholder="From">
+                    </div>
+                    <div class="form-group">
+                        <label for="arrival">Arrival</label>
+                        <input type="text" id="arrival" placeholder="To">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="depart-date">Depart</label>
+                        <input type="date" id="depart-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="return-date">Return</label>
+                        <input type="date" id="return-date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passengers">Passengers</label>
+                    <select id="passengers">
+                        <option>1 Passenger</option>
+                        <option>2 Passengers</option>
+                        <option>3 Passengers</option>
+                        <option>4+ Passengers</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Search Flights</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="flights">
+        <div class="container">
+            <h2 style="text-align: center; color: #062c8b; margin-bottom: 2rem; font-size: 2rem;">Why Choose Ryanair?</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-image">🚗</div>
+                    <div class="feature-content">
+                        <h3>Cheap Fares</h3>
+                        <p>Experience Europe's lowest fares with our unbeatable prices and special offers.</p>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">✈️</div>
+                    <div class="feature-content">
+                        <h3>Our Fleet</h3>
+                        <p>Modern Boeing 737 aircraft with state-of-the-art amenities for your comfort.</p>
+                        <a href="#" class="btn btn-secondary">View Fleet</a>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-image">🌍</div>
+                    <div class="feature-content">
+                        <h3>Extensive Network</h3>
+                        <p>Connect to over 200 destinations across Europe and beyond.</p>
+                        <a href="#" class="btn btn-secondary">View Routes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ryanair. All rights reserved.</p>
+            <p>Your favorite airline for low-cost travel across Europe.</p>
+        </div>
+    </footer>
+</body>
+</html>
